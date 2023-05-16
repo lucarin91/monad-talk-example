@@ -1,7 +1,6 @@
 use std::io;
 use std::str::FromStr;
 use std::string::FromUtf8Error;
-use tokio::fs;
 
 #[tokio::main]
 async fn main() {
@@ -25,7 +24,7 @@ enum PersonError {
 }
 
 async fn read_person(path: &str) -> Result<Person, PersonError> {
-    let b: Vec<u8> = fs::read(path).await?;
+    let b: Vec<u8> = tokio::fs::read(path).await?;
     let s: String = String::from_utf8(b)?;
     let p: Person = Person::from_str(&s)?;
     Ok(p)

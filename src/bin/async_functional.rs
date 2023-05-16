@@ -4,7 +4,6 @@ use std::fmt;
 use std::io;
 use std::str::FromStr;
 use std::string::FromUtf8Error;
-use tokio::fs;
 
 #[tokio::main]
 async fn main() {
@@ -17,7 +16,7 @@ async fn main() {
 }
 
 fn read_person(path: &str) -> impl Future<Output = Result<Person, PersonError>> + '_ {
-    fs::read(path).map(|r: Result<Vec<u8>, io::Error>| {
+    tokio::fs::read(path).map(|r: Result<Vec<u8>, io::Error>| {
         r.map_err(PersonError::from)
             .and_then(|b: Vec<u8>| String::from_utf8(b).map_err(PersonError::from))
             .and_then(|s: String| Person::from_str(&s))

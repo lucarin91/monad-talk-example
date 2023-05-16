@@ -1,6 +1,5 @@
 use std::error::Error;
 use std::fmt;
-use std::fs;
 use std::io;
 use std::str::FromStr;
 use std::string::FromUtf8Error;
@@ -15,7 +14,7 @@ fn main() {
 }
 
 fn read_person(path: &str) -> Result<Person, PersonError> {
-    let b: Vec<u8> = fs::read(path)?;
+    let b: Vec<u8> = std::fs::read(path)?;
     let s: String = String::from_utf8(b)?;
     let p: Person = Person::from_str(&s)?;
     Ok(p)
