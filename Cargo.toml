@@ -1,0 +1,12 @@
+[package]
+name = "error-example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+itertools = "0.10.5"
+thiserror = "1.0.40"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs"] }
+futures = "0.3.28"
